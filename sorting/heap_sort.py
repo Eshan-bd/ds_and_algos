@@ -1,10 +1,10 @@
 
 def parent(n):
     a = n+1
-    return (-1 if a==1 else int(a/2))-1
+    return (-1 if a==1 else int(a/2)-1)
 
 def left_child(n):
-    return (n+1)*2 -1
+    return (n+1)*2 - 1
 
 def bubble_up(pq, p):
     """ @param
@@ -15,7 +15,7 @@ def bubble_up(pq, p):
         return
     if pq[parent(p)] > pq[p]:
         pq[parent(p)], pq[p] = pq[p], pq[parent(p)]
-        bubble_up(pq, parent)
+        bubble_up(pq, parent(p))
 
 def insert(pq, x):
     """ @params
@@ -42,14 +42,12 @@ def extract_min(pq):
     return min
 
 def bubble_down(pq, p):
-    c = 0 # Child index
-    min_index = 0
 
     c = left_child(p)
     min_index = p
 
     for i in range(0, 2):
-        if c+i <= len(pq):
+        if c+i < len(pq):
             if pq[min_index] > pq[c+i]:
                 min_index = c+i
 
@@ -61,7 +59,6 @@ def heapsort(s):
     pq = []
 
     make_heap(pq, s)
-
     for i in range(0, len(s)-1):
         s[i] = extract_min(pq)
 
